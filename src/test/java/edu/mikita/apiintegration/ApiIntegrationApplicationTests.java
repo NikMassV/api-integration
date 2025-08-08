@@ -1,4 +1,4 @@
-package edu.mikita.api;
+package edu.mikita.apiintegration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
