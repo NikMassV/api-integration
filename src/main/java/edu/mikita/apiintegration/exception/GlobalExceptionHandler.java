@@ -23,8 +23,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDto);
     }
 
-    @ExceptionHandler(ApiUnauthorizedException.class)
-    public ResponseEntity<ErrorDto> handleUnauthorizedException(ApiUnauthorizedException ex, HttpServletRequest request) {
+    @ExceptionHandler(StockApiUnauthorizedException.class)
+    public ResponseEntity<ErrorDto> handleUnauthorizedException(StockApiUnauthorizedException ex, HttpServletRequest request) {
         ErrorDto errorDto = new ErrorDto(
                 ex.getMessage(),
                 "STOCK_API_UNAUTHORIZED",

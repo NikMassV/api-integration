@@ -7,11 +7,30 @@ services:
     volumes:
       - ./docker/stub-stock-api-mappings:/home/wiremock/mappings:ro
     healthcheck:
-      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/__admin/"]
+      test: ["CMD", "sh", "-c", "curl -s -o /dev/null -w '%{http_code}' -H 'X-API-Key: demo-secret-key' http://localhost:8080/stocks | grep -qE '200|404'"]
       interval: 10s
       timeout: 3s
       retries: 5
       start_period: 5s
+
+  stock-integration-app:
+    build: .
+    container_name: stock-integration-app
+    depends_on:
+      stub-stock-api:
+        condition: service_healthy
+    environment:
+      - API_KEY=demo-secret-key
+      - API_BASE_URL=http://stub-stock-api:8080
+      - API_MAX_RPS=10
+    ports:
+      - "8088:8099"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8099/actuator/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
 
 networks:
   api-integration-network:

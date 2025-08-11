@@ -2,7 +2,7 @@ package edu.mikita.apiintegration.service;
 
 import edu.mikita.apiintegration.api.StocksApi;
 import edu.mikita.apiintegration.dto.StockDto;
-import edu.mikita.apiintegration.exception.ApiUnauthorizedException;
+import edu.mikita.apiintegration.exception.StockApiUnauthorizedException;
 import edu.mikita.apiintegration.mapper.StockMapper;
 import feign.FeignException;
 import io.github.resilience4j.ratelimiter.RateLimiter;
@@ -18,31 +18,31 @@ public class StockService {
 
     private final StockMapper stockMapper;
     private final StocksApi stocksApi;
-    private final RateLimiter catApiRateLimiter;
+    private final RateLimiter apiRateLimiter;
 
     public List<StockDto> getAll() {
-        Supplier<List<StockDto>> catsSupplier = () -> {
+        Supplier<List<StockDto>> stocksSupplier = () -> {
             try {
                 var response = stocksApi.getStocks();
-                var externalCats = response.getBody();
-                return stockMapper.toDto(externalCats);
+                var externalStocks = response.getBody();
+                return stockMapper.toDto(externalStocks);
             } catch (FeignException.Unauthorized e) {
-                throw new ApiUnauthorizedException("Missing of incorrect API key");
+                throw new StockApiUnauthorizedException("Missing of incorrect API key");
             }
         };
         return RateLimiter
-                .decorateSupplier(catApiRateLimiter, catsSupplier)
+                .decorateSupplier(apiRateLimiter, stocksSupplier)
                 .get();
     }
 
     public StockDto getStockById(Long id) {
-        Supplier<StockDto> catByIdSupplier = () -> {
+        Supplier<StockDto> stockByIdSupplier = () -> {
             var response = stocksApi.getStockById(id);
-            var externalCat = response.getBody();
-            return stockMapper.toDto(externalCat);
+            var externalStock = response.getBody();
+            return stockMapper.toDto(externalStock);
         };
         return RateLimiter
-                .decorateSupplier(catApiRateLimiter, catByIdSupplier)
+                .decorateSupplier(apiRateLimiter, stockByIdSupplier)
                 .get();
     }
 }
