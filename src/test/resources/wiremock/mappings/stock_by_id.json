@@ -1,20 +1,23 @@
 {
   "request": {
     "method": "GET",
-    "urlPath": "/api/v1/stocks/1",
+    "urlPath": "/stocks/1",
     "headers": {
       "X-API-Key": {
-        "absent": true
+        "equalTo": "demo-secret-key"
       }
     }
   },
   "response": {
-    "status": 401,
+    "status": 200,
     "headers": {
       "Content-Type": "application/json"
     },
     "jsonBody": {
-      "message": "Missing or invalid API key"
+      "id": 1,
+      "symbol": "AAPL",
+      "name": "Apple Inc.",
+      "price": 195.35
     }
   }
 }

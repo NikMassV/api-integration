@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApiFeignConfig {
 
-    @Value("${api.key}")
+    @Value("${stock.api.key}")
     private String apiKey;
 
     @Bean
     public RequestInterceptor requestInterceptor() {
-        return requestTemplate -> requestTemplate.header("X-API-Key", "");
+        return requestTemplate -> requestTemplate.header("X-API-Key", apiKey);
     }
 }

@@ -75,7 +75,8 @@ tasks.register('annotateFeignClients') {
 				}
 				if (!text.contains("@FeignClient")) {
 					text = text.replaceFirst("public interface",
-							"@FeignClient(name = \"api\", url = \"\\\${api.base-url}\")\npublic interface")
+							"@FeignClient(name = \"api\", url = \"\\\${stock.api.base-url}\", configuration = edu.mikita.apiintegration.config.ApiFeignConfig.class)\npublic interface"
+					)
 				}
 				file.write(text)
 			}

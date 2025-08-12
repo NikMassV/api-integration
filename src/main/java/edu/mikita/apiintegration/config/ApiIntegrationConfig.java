@@ -12,7 +12,7 @@ import java.time.Duration;
 @Configuration
 public class ApiIntegrationConfig {
 
-    @Value("${api.max-rps}")
+    @Value("${stock.api.max-rps}")
     private int maxRps;
 
     @Bean

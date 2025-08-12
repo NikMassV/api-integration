@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Fake Stock API
+  title: Stub Stock API
   version: '1.0'
 servers:
   - url: http://localhost:8081
@@ -66,4 +66,4 @@ components:
           type: string
         price:
           type: number
-          format: float
+          format: decimal
