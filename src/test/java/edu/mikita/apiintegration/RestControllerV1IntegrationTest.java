@@ -11,6 +11,8 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.math.BigDecimal;
+
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static org.hamcrest.Matchers.is;
@@ -70,7 +72,7 @@ public class RestControllerV1IntegrationTest {
                                 """)));
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get("/api/v1/stocks/4044"))
                 .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isNotFound())
-                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.code", is("API_ITEM_NOT_FOUND")))
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.code", is("STOCK_API_ITEM_NOT_FOUND")))
                 .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.message", is("Stock not found in the external API")))
                 .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.path", is("/api/v1/stocks/4044")))
                 .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.timestamp").exists());

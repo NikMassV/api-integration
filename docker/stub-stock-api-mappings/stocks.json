@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "urlPattern": "/api/v1/stocks",
+    "urlPath": "/stocks",
     "headers": {
       "X-API-Key": {
         "equalTo": "demo-secret-key"

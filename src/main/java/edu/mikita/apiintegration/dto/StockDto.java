@@ -1,4 +1,6 @@
 package edu.mikita.apiintegration.dto;
 
-public record StockDto(Long id, String symbol, String name, Double price) {
+import java.math.BigDecimal;
+
+public record StockDto(Long id, String symbol, String name, BigDecimal price) {
 }

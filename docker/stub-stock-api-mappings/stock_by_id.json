@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "urlPattern": "/api/v1/stocks/1",
+    "urlPath": "/stocks/1",
     "headers": {
       "X-API-Key": {
         "equalTo": "demo-secret-key"
@@ -13,13 +13,11 @@
     "headers": {
       "Content-Type": "application/json"
     },
-    "jsonBody": [
-      {
-        "id": 1,
-        "symbol": "AAPL",
-        "name": "Apple Inc.",
-        "price": 195.35
-      }
-    ]
+    "jsonBody": {
+      "id": 1,
+      "symbol": "AAPL",
+      "name": "Apple Inc.",
+      "price": 195.35
+    }
   }
 }
