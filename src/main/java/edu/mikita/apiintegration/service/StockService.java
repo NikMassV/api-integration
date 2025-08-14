@@ -27,7 +27,7 @@ public class StockService {
                 var externalStocks = response.getBody();
                 return stockMapper.toDto(externalStocks);
             } catch (FeignException.Unauthorized e) {
-                throw new StockApiUnauthorizedException("Missing of incorrect API key");
+                throw new StockApiUnauthorizedException("Missing or incorrect API key");
             }
         };
         return RateLimiter
